@@ -38,7 +38,7 @@
 #include "DataChar.h"
 #include "DataDouble.h"
 #include "DataFloat.h"
-
+//#define MLOCKALL
 
 namespace ranger {
 
@@ -658,13 +658,14 @@ void Forest::predict() {
   } else {
     std::cout << "set deadline attr success" << std::endl;
   }
-  /*
+#ifdef MLOCKALL
   if (mlockall(MCL_CURRENT | MCL_FUTURE )) {
     std::cout << "can't set mlockall" << std::endl;
     return;
   } else {
     std::cout << "mlockall success" << std::endl;
-  }*/
+  }
+#endif
   allocatePredictMemory();
   for (int i = 0; i < 1000; i++) {
     //std::unique_ptr <Data> input_data = loadDataFromFile("./data/avila-tr_parse2.txt");
